@@ -30,8 +30,9 @@ def success():
 #===============================chat=====================================
 @app.route('/get-account')  
 def chat():
-	b_lines = [row for row in reversed(list(open("account.txt")))]
-	return render_template('log.html', b_lines=b_lines)
+	with open("account.txt", "r") as f:
+    		content = f.read()
+	return render_template("log.html", content=content)
 #========================================================================
 
 if __name__ == '__main__':
