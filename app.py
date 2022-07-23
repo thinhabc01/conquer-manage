@@ -30,18 +30,9 @@ def success():
 #===============================chat=====================================
 @app.route('/get-account')  
 def chat():
-	with open('account.txt','r') as f:
-    		lines = [line.rstrip() for line in f]
-	s = "<ul>"
-	for i in lines:
-		s+=f"<li>{i}</li>"
-	return s + "</ul>"
+	b_lines = [row for row in reversed(list(open("account.txt")))]
+	return render_template('log.html', b_lines=b_lines)
 #========================================================================
-# <ul>
-# <li>Coffee</li>
-# <li>Tea</li>
-# <li>Milk</li>
-# </ul>
 
 if __name__ == '__main__':
 	app.run(debug=True, use_reloader=True)
