@@ -24,7 +24,7 @@ def success():
 			with open("account.txt", 'a', encoding = 'utf-8') as f:
 				f.write(account)
 			return "success"
-		excapt Exception as e:
+		except Exception as e:
 			return "error: "+ e
 
 #===============================chat=====================================
