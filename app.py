@@ -32,12 +32,16 @@ def success():
 def chat():
 	with open('account.txt','r') as f:
     		lines = [line.rstrip() for line in f]
-	s = ""
+	s = "<ul>"
 	for i in lines:
-		s+=f"<p>{i}</p>"
-	return s
+		s+=f"<li>{i}</li>"
+	return s + "</ul>"
 #========================================================================
-
+# <ul>
+# <li>Coffee</li>
+# <li>Tea</li>
+# <li>Milk</li>
+# </ul>
 
 if __name__ == '__main__':
 	app.run(debug=True, use_reloader=True)
