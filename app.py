@@ -34,7 +34,7 @@ def chat():
     		lines = [line.rstrip() for line in f]
 	s = ""
 	for i in lines:
-		s+=f"<p>{i}</p>/n"
+		s+=f"<p>{i}</p>"
 	return s
 #========================================================================
 
