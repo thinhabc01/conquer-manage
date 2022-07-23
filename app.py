@@ -22,7 +22,7 @@ def success():
 		try:
 			account = request.form.get('account')
 			with open("account.txt", 'a', encoding = 'utf-8') as f:
-				f.write(account)
+				f.write(account+"\n")
 			return "success"
 		except Exception as e:
 			return "error: "+ e
