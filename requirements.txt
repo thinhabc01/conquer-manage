@@ -1,2 +1,6 @@
-Flask
+flask
+flask-sqlalchemy
+flask-login
+python-dotenv
 gunicorn
+psycopg2
