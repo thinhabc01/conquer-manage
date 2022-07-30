@@ -68,7 +68,7 @@ def success():
 #===============================get account=====================================
 @app.route('/get-account')  
 def chat():
-	columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
+    columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
     d = {column: search for column in columns}
     raw = [
         Account.query.filter(getattr(Account, col).ilike(f"{val}%")).all()
@@ -80,5 +80,5 @@ def chat():
 #========================================================================
 
 if __name__ == '__main__':
-	app.cli.add_command(create_tables)
+    app.cli.add_command(create_tables)
     app.run()
