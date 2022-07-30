@@ -6,7 +6,6 @@ import click
 
 
 app = Flask(__name__)
-app.cli.add_command(create_tables)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
@@ -42,6 +41,7 @@ class Account(db.Model):
 def create_tables():
     db.create_all()
 
+app.cli.add_command(create_tables)
 
 #================================home page=================================
 @app.route('/')
