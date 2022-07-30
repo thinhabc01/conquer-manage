@@ -36,7 +36,7 @@ class Account(db.Model):
 
 #=================================create table=============================
 @app.route('/start')
-def homepage():
+def creat_table():
     db.create_all()
     return """
         <h1>Server OK</h1
