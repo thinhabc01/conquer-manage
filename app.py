@@ -2,6 +2,7 @@ from flask import *
 from flask_sqlalchemy import SQLAlchemy
 from flask.cli import with_appcontext
 import os
+import click
 
 
 app = Flask(__name__)
@@ -35,12 +36,13 @@ class Account(db.Model):
 
 
 #=================================create table=============================
-@app.route('/start')
-def creat_table():
+@click.command(name='create_tables')
+@with_appcontext
+def create_tables():
     db.create_all()
-    return """
-        <h1>Server OK</h1
-        """
+
+app.cli.add_command(create_tables)
+
 
 #================================home page=================================
 @app.route('/')
