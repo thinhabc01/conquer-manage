@@ -6,6 +6,7 @@ import click
 
 
 app = Flask(__name__)
+app.cli.add_command(create_tables)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
@@ -80,5 +81,4 @@ def chat():
 #========================================================================
 
 if __name__ == '__main__':
-    app.cli.add_command(create_tables)
     app.run()
