@@ -20,14 +20,14 @@ db = SQLAlchemy(app)
 class Account(db.Model):
     __tablename__ = "account"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    password = db.Column(db.String(100))
-    group = db.Column(db.Integer)
-    server = db.Column(db.Integer)
-    lv1 = db.Column(db.Integer)
-    gold = db.Column(db.Integer)
-    lv2 = db.Column(db.Integer)
-    lv3 = db.Column(db.String(100))
+    name = db.Column(db.String(200))
+    password = db.Column(db.String(200))
+    group = db.Column(db.String(50))
+    server = db.Column(db.String(50))
+    lv1 = db.Column(db.String(50))
+    gold = db.Column(db.String(50))
+    lv2 = db.Column(db.String(50))
+    lv3 = db.Column(db.String(50))
 
     def __init__(self, name, password, group, server, lv1, gold, lv2, lv3):
         self.name = name
