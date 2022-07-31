@@ -77,7 +77,13 @@ def chat():
         socks = Account.query.filter_by().order_by(Account.id).all()
         sock_text = '<ul>'
         for sock in socks:
-            sock_text += '<li>' + sock.name + ', ' + sock.color + '</li>'
+            sock_text += '<li>' 
+            for column in columns:
+                if column == 'lv3':
+                    sock_text += sock[column]
+                else:
+                    sock_text += sock[column] + '|'
+            sock_text += '</li>'
         sock_text += '</ul>'
         return sock_text
     except Exception as e:
