@@ -75,9 +75,8 @@ def chat():
     columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
     try:
         socks = Account.query.filter_by(lv2='15').order_by(Account.id).all()
-        sock_text = '<ul>'
+        sock_text = <pre>
         for sock in socks:
-            sock_text += '<li>'
             sock_text += sock.name + '|'
             sock_text += sock.password + '|'
             sock_text += sock.group + '|'
@@ -85,9 +84,8 @@ def chat():
             sock_text += sock.lv1 + '|'
             sock_text += sock.gold + '|'
             sock_text += sock.lv2 + '|'
-            sock_text += sock.lv3
-            sock_text += '</li>'
-        sock_text += '</ul>'
+            sock_text += sock.lv3 + '\n'
+        sock_text += </pre>
         return sock_text
     except Exception as e:
         # e holds description of the error
