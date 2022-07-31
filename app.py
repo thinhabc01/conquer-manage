@@ -73,7 +73,7 @@ def success():
 @app.route('/get-account')  
 def chat():
     columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
-   try:
+    try:
         socks = Account.query.filter_by().order_by(Sock.id).all()
         sock_text = '<ul>'
         for sock in socks:
