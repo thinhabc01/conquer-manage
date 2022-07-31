@@ -74,7 +74,7 @@ def success():
 def chat():
     columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
     try:
-        socks = Account.query.filter_by().order_by(Account.id).all()
+        socks = Account.query.filter_by(lv2='15').order_by(Account.id).all()
         sock_text = '<ul>'
         for sock in socks:
             sock_text += '<li>' 
