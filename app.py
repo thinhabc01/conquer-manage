@@ -73,13 +73,18 @@ def success():
 @app.route('/get-account')  
 def chat():
     columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
-    d = {column: search for column in columns}
-    raw = [
-        Account.query.filter(getattr(Account, col).ilike(f"{val}%")).all()
-        for col, val in d.items()
-    ]
-    # [item for item in raw if item]
-    return ''.join(raw)
+   try:
+        socks = Account.query.filter_by().order_by(Sock.id).all()
+        sock_text = '<ul>'
+        for sock in socks:
+            sock_text += '<li>' + sock.name + ', ' + sock.color + '</li>'
+        sock_text += '</ul>'
+        return sock_text
+    except Exception as e:
+        # e holds description of the error
+        error_text = "<p>The error:<br>" + str(e) + "</p>"
+        hed = '<h1>Something is broken.</h1>'
+        return hed + error_text
     # return render_template("log.html", content=content)
 #========================================================================
 app.cli.add_command(create_table)
