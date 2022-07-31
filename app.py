@@ -77,12 +77,15 @@ def chat():
         socks = Account.query.filter_by(lv2='15').order_by(Account.id).all()
         sock_text = '<ul>'
         for sock in socks:
-            sock_text += '<li>' 
-            for column in columns:
-                if column == 'lv3':
-                    sock_text += sock[column]
-                else:
-                    sock_text += sock[column] + '|'
+            sock_text += '<li>'
+            sock_text += sock.name + '|'
+            sock_text += sock.password + '|'
+            sock_text += sock.group + '|'
+            sock_text += sock.server + '|'
+            sock_text += sock.lv1 + '|'
+            sock_text += sock.gold + '|'
+            sock_text += sock.lv2 + '|'
+            sock_text += sock.lv3
             sock_text += '</li>'
         sock_text += '</ul>'
         return sock_text
