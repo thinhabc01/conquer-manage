@@ -6,6 +6,11 @@ import re
 import click
 import requests
 
+
+app = Flask(__name__) 
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+url = os.environ.get('LINK_NOTEPAD')
+
 def read_data(url):
     headers = {}
     payload={}
@@ -26,47 +31,6 @@ def write_data(url, text):
     response = requests.request("POST", url, headers=headers, data=payload) 
     return response.text
 
-url = os.environ.get('LINK_NOTEPAD')
-
-app = Flask(__name__)
-
-uri = os.environ.get('DATABASE_URL')
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-    
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Account(db.Model):
-    __tablename__ = "account"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200))
-    password = db.Column(db.String(200))
-    group = db.Column(db.String(50))
-    server = db.Column(db.String(50))
-    lv1 = db.Column(db.String(50))
-    gold = db.Column(db.String(50))
-    lv2 = db.Column(db.String(50))
-    lv3 = db.Column(db.String(50))
-
-    def __init__(self, name, password, group, server, lv1, gold, lv2, lv3):
-        self.name = name
-        self.password = password
-        self.group = group
-        self.server = server
-        self.lv1 = lv1
-        self.gold = gold
-        self.lv2 = lv2
-        self.lv3 = lv3
-
-
-#=================================create table=============================
-@click.command(name='create_table')
-@with_appcontext
-def create_table():
-    db.create_all()
 
 #================================home page=================================
 @app.route('/')
@@ -83,9 +47,7 @@ def success():
             account = request.form.get('account')
             a = account.split("|")
             if len(a) == 8:
-                data = Account(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7])
-                db.session.add(data)
-                db.session.commit()
+                pass
 
                 return "success"
         except Exception as e:
