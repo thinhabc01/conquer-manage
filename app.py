@@ -4,7 +4,29 @@ from flask.cli import with_appcontext
 import os
 import re
 import click
+import requests
 
+def read_data(url):
+    headers = {}
+    payload={}
+    response = requests.request("GET", url, headers=headers, data=payload)
+
+    txt = response.text
+    start = txt.find('<textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;">')
+    end = txt.find('</textarea>')
+    if end > start:
+        return txt[start+92: end]
+    else:
+        return None
+
+def write_data(url, text):
+    headers = {}
+
+    payload={"text":text}
+    response = requests.request("POST", url, headers=headers, data=payload) 
+    return response.text
+
+url = os.environ.get('LINK_NOTEPAD')
 
 app = Flask(__name__)
 
