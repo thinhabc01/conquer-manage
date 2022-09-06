@@ -53,8 +53,10 @@ def success():
 
 #===============================get account=====================================
 @app.route('/get-account')  
-def chat():
-    return "error"
+def get_account():
+    sAccount = read_data(url)
+    txt = '<pre>'+sAccount+'</pre>'
+    return txt
 #===============================================================================
 
 if __name__ == '__main__':
