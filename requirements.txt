@@ -4,3 +4,4 @@ flask-login
 python-dotenv
 gunicorn
 psycopg2
+requests
