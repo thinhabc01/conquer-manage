@@ -1,9 +1,6 @@
 from flask import *
-from flask_sqlalchemy import SQLAlchemy
-from flask.cli import with_appcontext
+
 import os
-import re
-import click
 import requests
 
 
@@ -47,8 +44,9 @@ def success():
             account = request.form.get('account')
             a = account.split("|")
             if len(a) == 8:
-                pass
-
+                sAccount = read_data(url)
+                tAccount = sAccount+account+"\n"
+                write_data(url, tAccount)
                 return "success"
         except Exception as e:
             return "error: "+ e
@@ -56,30 +54,8 @@ def success():
 #===============================get account=====================================
 @app.route('/get-account')  
 def chat():
-    columns = ['name', 'password', 'group', 'server', 'lv1', 'gold', 'lv2', 'lv3']
-    try:
-        socks = Account.query.filter_by(lv2='15').order_by(Account.id).all()
-        sock_text = '<pre>'
-        for sock in socks:
-            sock_text += sock.name + '|'
-            sock_text += sock.password + '|'
-            sock_text += sock.group + '|'
-            sock_text += sock.server + '|'
-            sock_text += sock.lv1 + '|'
-            sock_text += sock.gold + '|'
-            sock_text += sock.lv2 + '|'
-            sock_text += sock.lv3 + '\n'
-        sock_text += '</pre>'
-        return sock_text
-    except Exception as e:
-        # e holds description of the error
-        error_text = "<p>The error:<br>" + str(e) + "</p>"
-        hed = '<h1>Something is broken.</h1>'
-        return hed + error_text
-    # return render_template("log.html", content=content)
-#========================================================================
-app.cli.add_command(create_table)
-
+    return "error"
+#===============================================================================
 
 if __name__ == '__main__':
     app.run()
