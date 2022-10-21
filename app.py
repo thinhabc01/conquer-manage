@@ -65,7 +65,7 @@ def get_account():
 #========================upload account=====================================
  
 @app.route('/uploadid', methods = ['POST'])  
-def success():
+def success1():
     if request.method == 'POST':
         try:
             account = request.form.get('account')
@@ -80,7 +80,7 @@ def success():
 
 #===============================get account=====================================
 @app.route('/get-id')  
-def get_account():
+def get_id():
     sAccount = read_data(url1)
     txt = '<pre>'+sAccount+'</pre>'
     return txt
