@@ -7,7 +7,8 @@ import re
 
 app = Flask(__name__) 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-url = os.environ.get('LINK_NOTEPAD')
+url1 = os.environ.get('LINK_NOTEPAD_1')
+url2 = os.environ.get('LINK_NOTEPAD_2')
 
 def read_data(url):
     headers = {}
@@ -46,9 +47,9 @@ def success():
             account = request.form.get('account')
             a = account.split("|")
             if len(a) == 8:
-                sAccount = read_data(url)
+                sAccount = read_data(url1)
                 tAccount = sAccount+account+"\n"
-                write_data(url, tAccount)
+                write_data(url1, tAccount)
                 return "success"
         except Exception as e:
             return "error: "+ e
@@ -56,7 +57,31 @@ def success():
 #===============================get account=====================================
 @app.route('/get-account')  
 def get_account():
-    sAccount = read_data(url)
+    sAccount = read_data(url1)
+    txt = '<pre>'+sAccount+'</pre>'
+    return txt
+#===============================================================================
+
+#========================upload account=====================================
+ 
+@app.route('/uploadid', methods = ['POST'])  
+def success():
+    if request.method == 'POST':
+        try:
+            account = request.form.get('account')
+            
+            sAccount = read_data(url1)
+            tAccount = sAccount+account+"\n"
+            write_data(url1, tAccount)
+            return "success"
+        
+        except Exception as e:
+            return "error: "+ e
+
+#===============================get account=====================================
+@app.route('/get-id')  
+def get_account():
+    sAccount = read_data(url1)
     txt = '<pre>'+sAccount+'</pre>'
     return txt
 #===============================================================================
