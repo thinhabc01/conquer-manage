@@ -16,10 +16,10 @@ def read_data(url):
 
     txt = response.text
 #     txt = re.search('<\W*textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" onkeyup="countChars(this);">\W*(.*)</textarea', txt, re.IGNORECASE).group(1)
-    start = txt.find("&amp;amp;lt;textarea id=&amp;amp;quot;content&amp;amp;quot; spellcheck=&amp;amp;quot;false&amp;amp;quot; style=&amp;amp;quot;font-family:Arial, Helvetica, sans-serif;&amp;amp;quot; onkeyup=&amp;amp;quot;countChars(this);&amp;amp;quot;&amp;amp;gt;")
+    start = txt.find('<textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" onkeyup="countChars(this);">')
     end = txt.find('</textarea>')
     if end > start:
-        return txt[start+246: end]
+        return txt[start+120: end]
     else:
         return None
 
