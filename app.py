@@ -70,7 +70,7 @@ def success1():
         try:
             account = request.form.get('account')
             
-            sAccount = read_data(url1)
+            sAccount = read_data(url2)
             tAccount = sAccount+account+"\n"
             write_data(url1, tAccount)
             return "success"
@@ -81,7 +81,7 @@ def success1():
 #===============================get account=====================================
 @app.route('/get-id')  
 def get_id():
-    sAccount = read_data(url1)
+    sAccount = read_data(url2)
     txt = '<pre>'+sAccount+'</pre>'
     return txt
 #===============================================================================
