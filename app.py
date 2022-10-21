@@ -15,13 +15,13 @@ def read_data(url):
     response = requests.request("GET", url, headers=headers, data=payload)
 
     txt = response.text
-    txt = re.search('<\W*textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" onkeyup="countChars(this);">\W*(.*)</textarea', txt, re.IGNORECASE).group(1)
-#     start = txt.find('<textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;">')
-#     end = txt.find('</textarea>')
-#     if end > start:
-#         return txt[start+92: end]
-#     else:
-#         return None
+#     txt = re.search('<\W*textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" onkeyup="countChars(this);">\W*(.*)</textarea', txt, re.IGNORECASE).group(1)
+    start = txt.find('<textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" " onkeyup="countChars(this);">')
+    end = txt.find('</textarea>')
+    if end > start:
+        return txt[start+92: end]
+    else:
+        return None
     return txt
 
 def write_data(url, text):
