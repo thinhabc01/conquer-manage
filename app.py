@@ -71,9 +71,11 @@ def success1():
             account = request.form.get('account')
             
             sAccount = read_data(url2)
-            tAccount = sAccount+account+"\n"
-            write_data(url1, tAccount)
-            return "success"
+            aAccount = sAccount.split("\n)
+            if account not in aAccount:
+                tAccount = sAccount+account+"\n"
+                write_data(url1, tAccount)
+                return "success"
         
         except Exception as e:
             return "error: "+ e
