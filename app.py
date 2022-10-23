@@ -73,7 +73,7 @@ def success1():
             aAccount = sAccount.split("\n")
             if account not in aAccount:
                 tAccount = sAccount+account+"\n"
-                write_data(url1, tAccount)
+                write_data(url2, tAccount)
                 return "success"
         
         except Exception as e:
