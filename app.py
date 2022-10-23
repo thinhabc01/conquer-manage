@@ -16,7 +16,6 @@ def read_data(url):
     response = requests.request("GET", url, headers=headers, data=payload)
 
     txt = response.text
-#     txt = re.search('<\W*textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" onkeyup="countChars(this);">\W*(.*)</textarea', txt, re.IGNORECASE).group(1)
     start = txt.find('<textarea id="content" spellcheck="false" style="font-family:Arial, Helvetica, sans-serif;" onkeyup="countChars(this);">')
     end = txt.find('</textarea>')
     if end > start:
@@ -64,14 +63,14 @@ def get_account():
 
 #========================upload account=====================================
  
-@app.route('/uploadid', methods = ['POST'])  
+@app.route('/upload-id', methods = ['POST'])  
 def success1():
     if request.method == 'POST':
         try:
             account = request.form.get('account')
             
             sAccount = read_data(url2)
-            aAccount = sAccount.split("\n)
+            aAccount = sAccount.split("\n")
             if account not in aAccount:
                 tAccount = sAccount+account+"\n"
                 write_data(url1, tAccount)
